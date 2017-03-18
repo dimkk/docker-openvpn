@@ -94,8 +94,7 @@ if [ $? = 0 ]; then
     sysctl -w net.ipv6.conf.all.forwarding=1 || echo "Failed to enable IPv6 Forwarding"
 fi
 
+exec start_dns
+
 echo "Running 'openvpn ${ARGS[@]} ${USER_ARGS[@]}'"
 openvpn ${ARGS[@]} ${USER_ARGS[@]} &
-sleep 15s
-echo "Running 'dnsmasq'"
-exec dnsmasq
