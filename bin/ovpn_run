@@ -97,4 +97,4 @@ fi
 exec start_dns &
 
 echo "Running 'openvpn ${ARGS[@]} ${USER_ARGS[@]}'"
-exec openvpn ${ARGS[@]} ${USER_ARGS[@]} &
+exec openvpn ${ARGS[@]} ${USER_ARGS[@]}
