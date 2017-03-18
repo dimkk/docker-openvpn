@@ -95,7 +95,7 @@ if [ $? = 0 ]; then
 fi
 
 echo "Running 'openvpn ${ARGS[@]} ${USER_ARGS[@]}'"
-openvpn ${ARGS[@]} ${USER_ARGS[@]}
-
+openvpn ${ARGS[@]} ${USER_ARGS[@]} &
+sleep 15s
 echo "Running 'dnsmasq'"
 exec dnsmasq
