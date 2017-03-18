@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ln -f /etc/hostfile/hosts /etc/hosts
 sleep 15s
 echo "Running 'dnsmasq'"
 dnsmasq
