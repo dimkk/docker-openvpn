@@ -14,6 +14,8 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community/" >> /etc/apk/reposi
 RUN apk --no-cache add openrc nano dnsmasq && \
     rc-update add dnsmasq
 
+COPY ./dnsmasq.conf /etc
+
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
 ENV EASYRSA /usr/share/easy-rsa
