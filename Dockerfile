@@ -15,6 +15,7 @@ RUN apk --no-cache add openrc nano dnsmasq && \
     rc-update add dnsmasq
 
 COPY ./dnsmasq.conf /etc
+COPY ccd/ /etc/openvpn/ccd
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
