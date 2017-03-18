@@ -338,11 +338,18 @@ keepalive $OVPN_KEEPALIVE
 persist-key
 persist-tun
 
+
 proto $OVPN_PROTO
 # Rely on Docker to do port mapping, internally always 1194
 port 1194
 dev $OVPN_DEVICE$OVPN_DEVICEN
 status /tmp/openvpn-status.log
+
+client-to-client
+client-config-dir /etc/openvpn/ccd
+
+# place certificate named file (like client1) with contents - push-ifconfig 192.168.255.11 192.168.255.10
+# so when client with connection client1.ovpn conntcts he will recieve 192.168.255.11 ip address
 
 user nobody
 group nogroup
