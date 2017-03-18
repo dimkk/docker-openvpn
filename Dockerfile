@@ -17,7 +17,7 @@ RUN apk --no-cache add openrc nano dnsmasq && \
 COPY ./dnsmasq.conf /etc
 COPY ./hosts /etc/hostfile
 
-RUN ln -sf /etc/hosts /etc/hostfile/hosts
+RUN ln -f /etc/hostfile/hosts /etc/hosts
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
