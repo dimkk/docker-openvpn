@@ -3,7 +3,7 @@
 # Smallest base image
 FROM alpine:3.5
 
-MAINTAINER Kyle Manna <kyle@kylemanna.com>
+MAINTAINER dimkk <dimkk@outlook.com>
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community/" >> /etc/apk/repositories && \
     echo "http://dl-4.alpinelinux.org/alpine/edge/testing/" >> /etc/apk/repositories && \
@@ -15,7 +15,9 @@ RUN apk --no-cache add openrc nano dnsmasq && \
     rc-update add dnsmasq
 
 COPY ./dnsmasq.conf /etc
-COPY ./hosts /etc
+COPY ./hosts /etc/hostfile
+
+RUN ln -sf /etc/hosts /etc/hostfile/hosts
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
@@ -23,7 +25,7 @@ ENV EASYRSA /usr/share/easy-rsa
 ENV EASYRSA_PKI $OPENVPN/pki
 ENV EASYRSA_VARS_FILE $OPENVPN/vars
 
-VOLUME ["/etc/openvpn", "/etc"]
+VOLUME ["/etc/openvpn", "/etc/hostfile"]
 
 # Internally uses port 1194/udp, remap using `docker run -p 443:1194/tcp`
 EXPOSE 1194/udp
