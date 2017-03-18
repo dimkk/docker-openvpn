@@ -72,9 +72,9 @@ tls-auth ta.key 1
 "
     fi
 
-    if [ "$OVPN_DEFROUTE" != "0" ];then
+    #if [ "$OVPN_DEFROUTE" != "0" ];then
         echo "redirect-gateway def1"
-    fi
+    #fi
 
     if [ -n "$OVPN_MTU" ]; then
         echo "tun-mtu $OVPN_MTU"
@@ -105,11 +105,11 @@ tls-auth ta.key 1
         echo "comp-lzo"
     fi
 
-    if [ "$OVPN_UBUNTU_REFRESH_DNS" == "1" ]; then
+    #if [ "$OVPN_UBUNTU_REFRESH_DNS" == "1" ]; then
         echo "script-security 2"
         echo "up /etc/openvpn/update-resolv-conf"
         echo "down /etc/openvpn/update-resolv-conf"
-    fi
+    #fi
 }
 
 dir="$OPENVPN/clients/$cn"
