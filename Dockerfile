@@ -24,7 +24,7 @@ ENV EASYRSA_VARS_FILE $OPENVPN/vars
 
 VOLUME ["/etc/openvpn", "/etc/hostfile"]
 
-COPY ./hosts /etc/hostfile/hosts
+COPY ./hosts /etc/hostfile/
 
 # Internally uses port 1194/udp, remap using `docker run -p 443:1194/tcp`
 EXPOSE 1194/udp
