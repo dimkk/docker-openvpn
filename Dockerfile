@@ -15,6 +15,7 @@ RUN apk --no-cache add openrc nano dnsmasq && \
     rc-update add dnsmasq
 
 COPY ./dnsmasq.conf /etc
+COPY ./hosts /etc
 
 # Needed by scripts
 ENV OPENVPN /etc/openvpn
@@ -22,7 +23,7 @@ ENV EASYRSA /usr/share/easy-rsa
 ENV EASYRSA_PKI $OPENVPN/pki
 ENV EASYRSA_VARS_FILE $OPENVPN/vars
 
-VOLUME ["/etc/openvpn"]
+VOLUME ["/etc/openvpn", "/etc/hosts"]
 
 # Internally uses port 1194/udp, remap using `docker run -p 443:1194/tcp`
 EXPOSE 1194/udp
