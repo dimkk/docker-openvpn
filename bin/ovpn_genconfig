@@ -106,6 +106,7 @@ usage() {
     echo " -t    Use TAP device (instead of TUN device)"
     echo " -T    Encrypt packets with the given cipher algorithm instead of the default one (tls-cipher)."
     echo " -z    Enable comp-lzo compression."
+    echo " -U    disable ubuntu refresh dns commands to client."
 }
 
 process_route_config() {
@@ -169,6 +170,7 @@ OVPN_EXTRA_CONFIG=''
 CUSTOM_ROUTE_CONFIG=''
 OVPN_COMP_LZO=0
 OVPN_DISABLE_PUSH_BLOCK_DNS=0
+OVPN_UBUNTU_REFRESH_DNS=1
 
 # Import defaults if present
 [ -r "$OVPN_ENV" ] && source "$OVPN_ENV"
@@ -201,6 +203,9 @@ while getopts ":a:e:E:C:T:r:s:du:bcp:n:k:DNmf:tz2" opt; do
         d)
             OVPN_DEFROUTE=0
             OVPN_DISABLE_PUSH_BLOCK_DNS=1
+            ;;
+        U)
+            OVPN_UBUNTU_REFRESH_DNS=0
             ;;
         u)
             OVPN_SERVER_URL=$OPTARG
@@ -277,7 +282,7 @@ fi
 # Apply defaults
 [ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
-[ -z "$CUSTOM_ROUTE_CONFIG" ] && [ "$OVPN_DEFROUTE" == "1" ] && process_route_config "192.168.254.0/24"
+[ -z "$CUSTOM_ROUTE_CONFIG" ] && [ "$OVPN_DEFROUTE" == "0" ] && process_route_config "192.168.254.0/24"
 
 # Save extra client config from temp file only if temp file is not empty
 if [ -s "$TMP_EXTRA_CLIENT_CONFIGFILE" ]; then
